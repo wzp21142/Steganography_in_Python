@@ -1,0 +1,6 @@
+!*.py
+!*.m
+!*.png
+!*.bmp
+!*.md
+/__pycache__/
