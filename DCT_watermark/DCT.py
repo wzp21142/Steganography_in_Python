@@ -48,19 +48,16 @@ def Extract_DCT(watermarkedImage,x):
         for j in range(64):
             if(watermark[i][j]==watermarkImage[i][j]):
                 count+=1
-    print("attack"+str(x)+":"+str(count/(64*64)))
+    print("attack"+str(x)+":"+str((1-count/(64*64))*100))
     cv2.imshow('watermark'+str(x), watermark)
-
+    cv2.imwrite("watermark"+str(x)+".bmp", watermark)
 #coverImage = cv2.imread('lenna.bmp',0)
 #watermarkImage = cv2.imread('test.bmp',0)
 #Watermarking_DCT(coverImage,watermarkImage)
 watermarkedImage = cv2.imread('watermarked.bmp',0)
 Extract_DCT(watermarkedImage,"norm")
-watermarkedImage = cv2.imread('attack1.bmp',0)
-Extract_DCT(watermarkedImage,2)
-watermarkedImage = cv2.imread('attack2.bmp',0)
-Extract_DCT(watermarkedImage,3)
-watermarkedImage = cv2.imread('attack3.bmp',0)
-Extract_DCT(watermarkedImage,4)
+for i in range(6):
+    watermarkedImage = cv2.imread('attack'+str(i+1)+'.bmp',0)
+    Extract_DCT(watermarkedImage,i+2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

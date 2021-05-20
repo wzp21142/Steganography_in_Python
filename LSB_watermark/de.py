@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 changed_flag=False
-im_matrix_origin = np.array(cv2.imread("output.png"))
+im_matrix_origin = np.array(cv2.imread("output_origin_block.png"))
 def de(im_matrix,RGB_pos):
     im_red=im_matrix[:,:,RGB_pos]
     im_red_bin=np.empty([im_matrix.shape[0],im_matrix.shape[1],8], dtype = int, order = 'C')
