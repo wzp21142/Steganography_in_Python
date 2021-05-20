@@ -1,5 +1,4 @@
 import cv2
-from reusable_funcs import *
 import numpy as np
 changed_flag=False
 im_matrix_origin = np.array(cv2.imread("output.png"))
