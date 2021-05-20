@@ -67,18 +67,28 @@ def imwrite(channel, binary_ino_list, im_matrix_im):
                 i += 1
                 j = 0
     global two_im_matrix
+    bucket=np.zeros((8))
+    count=0
     for m in range(two_im_matrix.shape[0]):
+        countr=0
         for n in range(two_im_matrix.shape[1]):
-            if two_im_matrix[m][n]==0:
-                if(m==0):
-                    im_red_bin[m][24+n][7]=0
-                else:
-                    im_red_bin[m][n][7] = 0
-            else:
-                if(m==0):
-                    im_red_bin[m][24+n][7]=1
-                else:
-                    im_red_bin[m][n][7] = 1
+            bucket[count]=two_im_matrix[m][n]
+            count+=1
+            if(count==8):
+                bucket=bucket[np.argsort(key_list)]
+                for x in bucket:
+                    if x==0:
+                        if(m==0):
+                            im_red_bin[m][24+countr][7]=0
+                        else:
+                            im_red_bin[m][countr][7] = 0
+                    else:
+                        if(m==0):
+                            im_red_bin[m][24+countr][7]=1
+                        else:
+                            im_red_bin[m][countr][7] = 1
+                    countr+=1
+                count=0
             if(n==two_im_matrix.shape[1]-24 and m==0):
                 break
     for _i in range(two_im_matrix.shape[0]):

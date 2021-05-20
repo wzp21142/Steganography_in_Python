@@ -69,7 +69,20 @@ for i in range(result[0]):
         else:
             if(im_red_bin[i][j][7]==1):
                 watermark[i][j]=255
-cv2.imshow("watermark",watermark)
-cv2.imwrite("watermark_recover.bmp",watermark)
+bucket=np.zeros((8))
+count=0
+original=np.zeros((result[0],result[1]))
+for i in range(result[0]):
+    count2=0
+    for j in range(result[1]):
+        bucket[count] = watermark[i][j]
+        count += 1
+        if (count == 8):
+            bucket = bucket[np.argsort(decode_list)]
+            original[i,count2*8:count2*8+8]=bucket
+            count2+=1
+            count=0
+cv2.imshow("watermark",original)
+cv2.imwrite("watermark_recover.bmp",original)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
